@@ -2,11 +2,11 @@ require_relative '../../lib/checkout'
 
 describe 'Integration Specs' do
   let(:products) do
-    {
-      001 => Item.new('Lavender heart', 925),
-      002 => Item.new('Personalised cufflinks', 425),
-      003 => Item.new('Kids T-shirt', 1995)
-    }
+    [
+      Item.new(001, 'Lavender heart', 925),
+      Item.new(002, 'Personalised cufflinks', 425),
+      Item.new(003, 'Kids T-shirt', 1995)
+    ]
   end
   subject(:checkout) { Checkout.new products: products }
 
