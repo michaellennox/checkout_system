@@ -1,4 +1,5 @@
 require_relative '../../lib/checkout'
+require_relative '../../lib/item'
 
 describe 'Integration Specs' do
   let(:products) do

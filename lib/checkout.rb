@@ -1,8 +1,7 @@
-require 'byebug'
-
 class Checkout
-  def initialize(products: nil)
+  def initialize(products: nil, cost_engine: nil)
     @products = products
+    @cost_engine = cost_engine
     @order = Hash.new(0)
   end
 
@@ -11,9 +10,13 @@ class Checkout
     @order[item_code] += 1
   end
 
+  def total
+    "£#{'%.2f' % (cost_engine.calculate_basket(products, order) / 100)}"
+  end
+
   private
 
-  attr_reader :products
+  attr_reader :products, :cost_engine, :order
 
   def item_in_products?(item_code)
     products.map{ |product| product.code }.include?(item_code)
