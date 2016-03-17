@@ -1,5 +1,7 @@
+require_relative 'cost_engine'
+
 class Checkout
-  def initialize(products: nil, cost_engine: nil)
+  def initialize(products: nil, cost_engine: CostEngine)
     @products = products
     @cost_engine = cost_engine
     @order = Hash.new(0)
