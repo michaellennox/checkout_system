@@ -1,7 +1,7 @@
 describe CostEngine do
   subject(:cost_engine) { described_class.new products }
-  let(:item_001) { double :Item, code: "001", cost: 900 }
-  let(:item_002) { double :Item, code: "002", cost: 300 }
+  let(:item_001) { double :Item, code: "001", price: 900 }
+  let(:item_002) { double :Item, code: "002", price: 300 }
   let(:products) { [item_001, item_002] }
   let(:order) { { "001" => 1, "002" => 1 } }
 
