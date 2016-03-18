@@ -13,12 +13,16 @@ class Checkout
   end
 
   def total
-    "£#{'%.2f' % (cost_engine.calculate_basket(products, order) / 100)}"
+    '£%.2f' % order_cost_in_pounds
   end
 
   private
 
   attr_reader :products, :cost_engine, :order
+
+  def order_cost_in_pounds
+    cost_engine.total_basket(products, order) / 100
+  end
 
   def item_in_products?(item_code)
     products.map{ |product| product.code }.include?(item_code)

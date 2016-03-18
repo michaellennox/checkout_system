@@ -17,7 +17,7 @@ describe Checkout do
       checkout.scan('001')
       checkout.scan('001')
 
-      allow(cost_engine).to receive(:calculate_basket)
+      allow(cost_engine).to receive(:total_basket)
         .with(products, {'001' => 2}).and_return(500)
 
       expect(checkout.total).to eq '£5.00'
