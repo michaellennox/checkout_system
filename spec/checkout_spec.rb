@@ -1,10 +1,11 @@
 require_relative '../lib/checkout'
 
 describe Checkout do
+  let(:cost_engine_klass) { double :CostEngine_klass, new: cost_engine }
   let(:cost_engine) { double :CostEngine }
   let(:item) { double :Item, code: '001' }
   let(:products) { [item] }
-  subject(:checkout) { described_class.new(products: products, cost_engine: cost_engine) }
+  subject(:checkout) { described_class.new(products: products, cost_engine_klass: cost_engine_klass) }
 
   describe '#scan' do
     it 'is expected to raise an error if given a code that is not in products' do
@@ -18,7 +19,7 @@ describe Checkout do
       checkout.scan('001')
 
       allow(cost_engine).to receive(:total_basket)
-        .with(products, {'001' => 2}).and_return(500)
+        .with({'001' => 2}).and_return(500)
 
       expect(checkout.total).to eq '£5.00'
     end
