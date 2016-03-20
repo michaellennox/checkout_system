@@ -55,7 +55,7 @@ lavender_heart_discount = Proc.new { |current_sum, order| order["001"] >= 2 ? or
 # The discounts run sequentially from start to end,
 # so if you need to apply one discount before another make sure it is earlier
 
-pricing_rules = [ten_percent_discount, lavender_heart_discount]
+pricing_rules = [lavender_heart_discount, ten_percent_discount]
 
 # To initialize the system pass pricing_rules and products as arguments
 # pricing_rules is a standard argument, products is a keyword argument
