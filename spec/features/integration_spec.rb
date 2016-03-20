@@ -5,7 +5,7 @@ describe 'Integration Specs' do
   let(:products) do
     [
       Item.new('001', 'Lavender heart', 925),
-      Item.new('002', 'Personalised cufflinks', 425),
+      Item.new('002', 'Personalised cufflinks', 4500),
       Item.new('003', 'Kids T-shirt', 1995)
     ]
   end
