@@ -14,14 +14,26 @@ describe 'Integration Specs' do
     Proc.new { |current_sum, order| current_sum > 6000 ? current_sum * 0.1 : 0 }
   end
 
-  let(:promotional_rules) { [ten_percent_discount] }
+  let(:lavender_heart_discount) do
+    Proc.new { |current_sum, order| order["001"] >= 2 ? order["001"] * 75 : 0 }
+  end
+
+  let(:promotional_rules) { [lavender_heart_discount, ten_percent_discount] }
   subject(:checkout) { Checkout.new(promotional_rules, products: products) }
 
-  it 'Test to cover 10% discount for over £60' do
+  it 'is expected to apply a 10% discount for over £60' do
     checkout.scan '001'
     checkout.scan '002'
     checkout.scan '003'
 
     expect(checkout.total).to eq '£66.78'
+  end
+
+  it 'is expected to apply a price drop when given 2 lavender hearts in order' do
+    checkout.scan '001'
+    checkout.scan '003'
+    checkout.scan '001'
+
+    expect(checkout.total).to eq '£36.95'
   end
 end

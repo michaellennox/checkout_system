@@ -15,7 +15,7 @@ describe CostEngine do
       expect(cost_engine.total_basket(order)).to eq 1200
     end
 
-    it 'is expected to be able to apply a % discount' do
+    it 'is expected to be able to apply a given discount' do
       order = { "001" => 3 }
       expect(cost_engine.total_basket(order)).to eq 2430
     end
