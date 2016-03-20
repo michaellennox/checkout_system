@@ -47,7 +47,7 @@ products = [item_001, item_002, item_003]
 # For example the following applies a 10% discount to all orders over £60
 ten_percent_discount = Proc.new { |current_sum, order| current_sum > 6000 ? current_sum * 0.1 : 0 }
 
-# And this one discounts lavender hearts if you order at least 2 of them
+# And this one discounts lavender hearts by 75p if you order at least 2 of them
 lavender_heart_discount = Proc.new { |current_sum, order| order["001"] >= 2 ? order["001"] * 75 : 0 }
 
 # You can then store these in an array to be injected into the system,
