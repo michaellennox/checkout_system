@@ -16,7 +16,7 @@ $ bundle install
 
 ## Usage Instructions
 
-The system can be run from a REPL such as irb or pry. To open irb enter `$ irb` while in the root directory.
+The system can be run from a REPL such as irb or pry. To open irb enter `$ irb` while in the project root directory.
 
 ```ruby
 $ irb
