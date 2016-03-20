@@ -9,7 +9,13 @@ describe 'Integration Specs' do
       Item.new('003', 'Kids T-shirt', 1995)
     ]
   end
-  subject(:checkout) { Checkout.new products: products }
+
+  let(:ten_percent_discount) do
+    Proc.new { |current_sum, order| current_sum > 6000 ? current_sum * 0.1 : 0 }
+  end
+
+  let(:promotional_rules) { [ten_percent_discount] }
+  subject(:checkout) { Checkout.new(promotional_rules, products: products) }
 
   it 'Test to cover 10% discount for over £60' do
     checkout.scan '001'

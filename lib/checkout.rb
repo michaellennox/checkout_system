@@ -1,9 +1,9 @@
 require_relative 'cost_engine'
 
 class Checkout
-  def initialize(products: nil, cost_engine_klass: CostEngine)
+  def initialize(promotional_rules = nil, products: nil, cost_engine_klass: CostEngine)
     @products = products
-    @cost_engine = cost_engine_klass.new(products: products)
+    @cost_engine = cost_engine_klass.new(promotional_rules, products: products)
     @order = Hash.new(0)
   end
 
