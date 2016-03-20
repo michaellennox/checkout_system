@@ -1,5 +1,3 @@
-require 'byebug'
-
 class CostEngine
   def initialize(promotional_rules, products: nil)
     @promotional_rules = promotional_rules

@@ -21,7 +21,7 @@ class Checkout
   attr_reader :products, :cost_engine, :order
 
   def order_cost_in_pounds
-    cost_engine.total_basket(order) / 100.0
+    (cost_engine.total_basket(order) / 100.0).round(2)
   end
 
   def item_in_products?(item_code)
