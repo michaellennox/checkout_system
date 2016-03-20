@@ -1,17 +1,22 @@
+require 'byebug'
+
 class CostEngine
-  def initialize(products: nil)
+  def initialize(promotional_rules, products: nil)
+    @promotional_rules = promotional_rules
     @product_prices = products_with_prices(products)
   end
 
   def total_basket(order)
-    before_discount(order)
+    promotional_rules.reduce(sum_without_discounts(order)) do |sum, rule|
+      sum - rule.call(sum, order)
+    end
   end
 
   private
 
-  attr_reader :product_prices
+  attr_reader :product_prices, :promotional_rules
 
-  def before_discount(order)
+  def sum_without_discounts(order)
     order.reduce(0) do |sum, (item, num)|
       sum += cost_for(item, num)
     end

@@ -3,7 +3,7 @@ describe CostEngine do
   let(:item_002) { double :Item, code: "002", price: 300 }
   let(:products) { [item_001, item_002] }
   let(:percent_discount) do
-    Proc.new { |current_sum, order| current_sum * 0.1 if current_sum > 1500 }
+    Proc.new { |current_sum, order| current_sum > 1500 ? current_sum * 0.1 : 0}
   end
   let(:promotional_rules) { [percent_discount] }
 
