@@ -5,9 +5,7 @@ class CostEngine
   end
 
   def total_basket(order)
-    promotional_rules.reduce(sum_without_discounts(order)) do |sum, rule|
-      sum - rule.call(sum, order)
-    end
+    apply_discounts(sum_without_discounts(order), order)
   end
 
   private
@@ -17,6 +15,12 @@ class CostEngine
   def sum_without_discounts(order)
     order.reduce(0) do |sum, (item, num)|
       sum += cost_for(item, num)
+    end
+  end
+
+  def apply_discounts(cost_before_discounts, order)
+    promotional_rules.reduce(cost_before_discounts) do |sum, rule|
+      sum - rule.call(sum, order)
     end
   end
 
