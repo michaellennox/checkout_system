@@ -44,20 +44,11 @@ products = [item_001, item_002, item_003]
 # You will then need to build any promotional rules you need to apply,
 # Two constructors are provided for your convenience, PercentDiscount and ItemDiscount
 
-# To build a percentage discount initialize PercentDiscount with two arguments,
-# The first is the percentage you want to discount the order by
-# The second is the minimum value the order must meet to receive the discount in pennies
-
 # For example, we want to apply a 10% discount to orders over £60 (6000p)
-ten_percent_discount = PercentDiscount.new(10, 6000)
+ten_percent_discount = PercentDiscount.new(percent_discount: 10, threshold: 6000)
 
-# To build a discount for ordering a certain number of items initialize ItemDiscount with three arguments,
-# The first is the item code which the discount is applicable for
-# The second is the minimum number of items required to qualify for a discount
-# The third is the amount to be discounted from each item in pennies if it qualifies
-
-# For example, here we want to apply a 75p discount on each Lavender Heart when you order 2 or more
-lavender_heart_discount = ItemDiscount.new("001", 2, 75)
+# We want to apply a 75p discount per item when you order 2 or more "001" items
+lavender_heart_discount = ItemDiscount.new(code: "001", threshold: 2, discount: 75)
 
 # You can then store these in an array to be injected into the system,
 # Please note the order you arrange items in that array,

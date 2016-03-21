@@ -6,14 +6,14 @@ class ItemDiscount
   end
 
   def apply(current_total, order)
-    enough_items_for_discount?(order) ? apply_discount(order) : 0
+    should_discount_be_applied?(order) ? apply_discount(order) : 0
   end
 
   private
 
   attr_reader :item_code, :min_items, :discount_to_apply
 
-  def enough_items_for_discount?(order)
+  def should_discount_be_applied?(order)
     order[item_code] >= min_items
   end
 

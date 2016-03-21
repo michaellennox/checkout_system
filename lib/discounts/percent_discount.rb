@@ -1,19 +1,19 @@
 class PercentDiscount
-  def initialize(percent_discount, min_value)
+  def initialize(percent_discount:, threshold:)
     @percent_discount = percent_discount
-    @min_value = min_value
+    @threshold = threshold
   end
 
   def apply(current_total, order)
-    total_enough_for_discount?(current_total) ? apply_discount(current_total) : 0
+    should_discount_be_applied?(current_total) ? apply_discount(current_total) : 0
   end
 
   private
 
-  attr_reader :percent_discount, :min_value
+  attr_reader :percent_discount, :threshold
 
-  def total_enough_for_discount?(current_total)
-    current_total > min_value
+  def should_discount_be_applied?(current_total)
+    current_total > threshold
   end
 
   def apply_discount(current_total)

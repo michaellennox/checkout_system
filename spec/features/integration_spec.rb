@@ -12,7 +12,7 @@ describe 'Integration Specs' do
     ]
   end
 
-  let(:ten_percent_discount) { PercentDiscount.new(10, 6000) }
+  let(:ten_percent_discount) { PercentDiscount.new(percent_discount: 10, threshold: 6000) }
 
   let(:lavender_heart_discount) { ItemDiscount.new("001", 2, 75)}
 
