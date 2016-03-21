@@ -1,8 +1,8 @@
 class ItemDiscount
-  def initialize(item_code, min_items, discount_to_apply)
+  def initialize(item_code:, min_items:, discount:)
     @item_code = item_code
     @min_items = min_items
-    @discount_to_apply = discount_to_apply
+    @discount = discount
   end
 
   def apply(current_total, order)
@@ -11,13 +11,13 @@ class ItemDiscount
 
   private
 
-  attr_reader :item_code, :min_items, :discount_to_apply
+  attr_reader :item_code, :min_items, :discount
 
   def should_discount_be_applied?(order)
     order[item_code] >= min_items
   end
 
   def apply_discount(order)
-    order[item_code] * discount_to_apply
+    order[item_code] * discount
   end
 end

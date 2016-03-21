@@ -13,9 +13,7 @@ describe 'Integration Specs' do
   end
 
   let(:ten_percent_discount) { PercentDiscount.new(percent_discount: 10, threshold: 6000) }
-
-  let(:lavender_heart_discount) { ItemDiscount.new("001", 2, 75)}
-
+  let(:lavender_heart_discount) { ItemDiscount.new(item_code: "001", min_items: 2, discount: 75) }
   let(:promotional_rules) { [lavender_heart_discount, ten_percent_discount] }
   subject(:checkout) { Checkout.new(promotional_rules, products: products) }
 

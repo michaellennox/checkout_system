@@ -48,7 +48,7 @@ products = [item_001, item_002, item_003]
 ten_percent_discount = PercentDiscount.new(percent_discount: 10, threshold: 6000)
 
 # We want to apply a 75p discount per item when you order 2 or more "001" items
-lavender_heart_discount = ItemDiscount.new(code: "001", threshold: 2, discount: 75)
+lavender_heart_discount = ItemDiscount.new(item_code: "001", min_items: 2, discount: 75)
 
 # You can then store these in an array to be injected into the system,
 # Please note the order you arrange items in that array,
