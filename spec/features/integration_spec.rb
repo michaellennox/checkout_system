@@ -17,7 +17,7 @@ describe 'Integration Specs' do
   let(:promotional_rules) { [lavender_heart_discount, ten_percent_discount] }
   subject(:checkout) { Checkout.new(promotional_rules, products: products) }
 
-  it 'is expected to apply a 10% discount for over £60' do
+  it 'A 10% discount is expected to be applied for orders over £60' do
     checkout.scan '001'
     checkout.scan '002'
     checkout.scan '003'
@@ -25,7 +25,7 @@ describe 'Integration Specs' do
     expect(checkout.total).to eq '£66.78'
   end
 
-  it 'is expected to apply a price drop when given 2 lavender hearts in order' do
+  it 'A discount is meant to be applied when 2 lavender hearts are ordered' do
     checkout.scan '001'
     checkout.scan '003'
     checkout.scan '001'
@@ -33,7 +33,7 @@ describe 'Integration Specs' do
     expect(checkout.total).to eq '£36.95'
   end
 
-  it 'is expected to apply multiple discounts together correctly' do
+  it 'Multiple discounts should be applied together in the right order' do
     checkout.scan '001'
     checkout.scan '002'
     checkout.scan '001'
