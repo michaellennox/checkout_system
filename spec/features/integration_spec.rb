@@ -1,6 +1,7 @@
 require_relative '../../lib/checkout'
 require_relative '../../lib/item'
 require_relative '../../lib/discounts/percent_discount'
+require_relative '../../lib/discounts/item_discount'
 
 describe 'Integration Specs' do
   let(:products) do
