@@ -32,11 +32,9 @@ require_relative 'lib/discounts/item_discount'
 require_relative 'lib/discounts/percent_discount'
 
 # To build your catalog, create Item objects representing each item in the catalog,
-# The item takes 3 arguments, the code as a string, the name as a string
-# and the price as an integer in pennies
-item_001 = Item.new('001', 'Lavender heart', 925)
-item_002 = Item.new('002', 'Personalised cufflinks', 4500)
-item_003 = Item.new('003', 'Kids T-shirt', 1995)
+item_001 = Item.new(code: '001', name: 'Lavender heart', price: 925)
+item_002 = Item.new(code: '002', name: 'Personalised cufflinks', price: 4500)
+item_003 = Item.new(code: '003', name: 'Kids T-shirt', price: 1995)
 
 # Store these items in an array to be used by the system
 products = [item_001, item_002, item_003]
@@ -51,18 +49,12 @@ ten_percent_discount = PercentDiscount.new(percent_discount: 10, threshold: 6000
 lavender_heart_discount = ItemDiscount.new(item_code: "001", min_items: 2, discount: 75)
 
 # You can then store these in an array to be injected into the system,
-# Please note the order you arrange items in that array,
-# The discounts run sequentially from start to end,
-# So if you need to apply one discount before another make sure it is earlier
-
+# These should be ordered in the order you want them to be applied
 pricing_rules = [lavender_heart_discount, ten_percent_discount]
 
-# To initialize the system pass pricing_rules and products as arguments
-# pricing_rules is a standard argument, products is a keyword argument
-
+# To initialize the system initialize the Checkout with the pricing_rules and your products
 checkout = Checkout.new(pricing_rules, products: products)
 
-# You can then use your checkout to calculate the price of a basket
 # The checkout has two methods,
 # #scan => this takes the key code of the item as a string and adds it to your basket
 # #total => this returns the cost of the current basket as a string in pounds

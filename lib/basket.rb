@@ -1,10 +1,10 @@
-class CostEngine
+class Basket
   def initialize(promotional_rules, products: nil)
     @promotional_rules = promotional_rules
     @product_prices = products_with_prices(products)
   end
 
-  def total_basket(order)
+  def total(order)
     apply_discounts(sum_without_discounts(order), order)
   end
 

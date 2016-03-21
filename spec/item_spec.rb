@@ -1,7 +1,7 @@
 require_relative '../lib/item'
 
 describe Item do
-  subject(:item) { described_class.new('001', 'Lavender heart', 900) }
+  subject(:item) { described_class.new(code: '001', name: 'Lavender heart', price: 900) }
 
   describe '#price' do
     it 'is expected to return the price of the item' do

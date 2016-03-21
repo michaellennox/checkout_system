@@ -1,9 +1,9 @@
-require_relative 'cost_engine'
+require_relative 'basket'
 
 class Checkout
-  def initialize(promotional_rules = nil, products: nil, cost_engine_klass: CostEngine)
+  def initialize(promotional_rules = nil, products: nil, basket_klass: Basket)
     @products = products
-    @cost_engine = cost_engine_klass.new(promotional_rules, products: products)
+    @basket = basket_klass.new(promotional_rules, products: products)
     @order = Hash.new(0)
   end
 
@@ -18,10 +18,10 @@ class Checkout
 
   private
 
-  attr_reader :products, :cost_engine, :order
+  attr_reader :products, :basket, :order
 
   def order_cost_in_pounds
-    (cost_engine.total_basket(order) / 100.0).round(2)
+    (basket.total(order) / 100.0).round(2)
   end
 
   def item_in_products?(item_code)

@@ -6,9 +6,9 @@ require_relative '../../lib/discounts/item_discount'
 describe 'Integration Specs' do
   let(:products) do
     [
-      Item.new('001', 'Lavender heart', 925),
-      Item.new('002', 'Personalised cufflinks', 4500),
-      Item.new('003', 'Kids T-shirt', 1995)
+      Item.new(code: '001', name: 'Lavender heart', price: 925),
+      Item.new(code: '002', name: 'Personalised cufflinks', price: 4500),
+      Item.new(code: '003', name: 'Kids T-shirt', price: 1995)
     ]
   end
 
