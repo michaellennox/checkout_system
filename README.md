@@ -26,34 +26,43 @@ $ irb
 require_relative 'lib/checkout'
 require_relative 'lib/item'
 
+# You will also need to require any discounts you plan to use in your system,
+# These are stored in lib/discounts
+require_relative 'lib/discounts/item_discount'
+require_relative 'lib/discounts/percent_discount'
+
 # To build your catalog, create Item objects representing each item in the catalog,
 # The item takes 3 arguments, the code as a string, the name as a string
 # and the price as an integer in pennies
-item_001 = Item.new('001', 'Lavender heart', 925),
-item_002 = Item.new('002', 'Personalised cufflinks', 4500),
+item_001 = Item.new('001', 'Lavender heart', 925)
+item_002 = Item.new('002', 'Personalised cufflinks', 4500)
 item_003 = Item.new('003', 'Kids T-shirt', 1995)
 
 # Store these items in an array to be used by the system
 products = [item_001, item_002, item_003]
 
 # You will then need to build any promotional rules you need to apply,
-# These rules are built with Ruby procs which have access to two parameters,
-# The current running basket sum, and the items listed in order
-# The running basket sum is an integer in pennies,
-# The items in order are a hash containing a key of the item code and a value of the number in order
+# Two constructors are provided for your convenience, PercentDiscount and ItemDiscount
 
-# The return value of your proc should be the amount to be removed from the running sum
+# To build a percentage discount initialize PercentDiscount with two arguments,
+# The first is the percentage you want to discount the order by
+# The second is the minimum value the order must meet to receive the discount in pennies
 
-# For example the following applies a 10% discount to all orders over £60
-ten_percent_discount = Proc.new { |current_sum, order| current_sum > 6000 ? current_sum * 0.1 : 0 }
+# For example, we want to apply a 10% discount to orders over £60 (6000p)
+ten_percent_discount = PercentDiscount.new(10, 6000)
 
-# And this one discounts lavender hearts by 75p if you order at least 2 of them
-lavender_heart_discount = Proc.new { |current_sum, order| order["001"] >= 2 ? order["001"] * 75 : 0 }
+# To build a discount for ordering a certain number of items initialize ItemDiscount with three arguments,
+# The first is the item code which the discount is applicable for
+# The second is the minimum number of items required to qualify for a discount
+# The third is the amount to be discounted from each item in pennies if it qualifies
+
+# For example, here we want to apply a 75p discount on each Lavender Heart when you order 2 or more
+lavender_heart_discount = ItemDiscount.new("001", 2, 75)
 
 # You can then store these in an array to be injected into the system,
 # Please note the order you arrange items in that array,
 # The discounts run sequentially from start to end,
-# so if you need to apply one discount before another make sure it is earlier
+# So if you need to apply one discount before another make sure it is earlier
 
 pricing_rules = [lavender_heart_discount, ten_percent_discount]
 
@@ -81,7 +90,6 @@ price # => '£73.76'
 
 * Right now products are being represented as an array of Items and then injected into the system. In a real system these would be held as a table in a database and accessed that way.
 * Order is being represented by a Hash within Checkout. This could be extracted to an in memory datastore such as redis.
-* Promotional rules need to be manually written, a system could be implemented that took parameters and built your Proc using them.
 
 ## Running Tests
 
