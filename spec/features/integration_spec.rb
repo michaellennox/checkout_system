@@ -1,5 +1,6 @@
 require_relative '../../lib/checkout'
 require_relative '../../lib/item'
+require_relative '../../lib/discounts/percent_discount'
 
 describe 'Integration Specs' do
   let(:products) do
@@ -10,13 +11,9 @@ describe 'Integration Specs' do
     ]
   end
 
-  let(:ten_percent_discount) do
-    Proc.new { |current_sum, order| current_sum > 6000 ? current_sum * 0.1 : 0 }
-  end
+  let(:ten_percent_discount) { PercentDiscount.new(10, 6000) }
 
-  let(:lavender_heart_discount) do
-    Proc.new { |current_sum, order| order["001"] >= 2 ? order["001"] * 75 : 0 }
-  end
+  let(:lavender_heart_discount) { ItemDiscount.new("001", 2, 75)}
 
   let(:promotional_rules) { [lavender_heart_discount, ten_percent_discount] }
   subject(:checkout) { Checkout.new(promotional_rules, products: products) }
