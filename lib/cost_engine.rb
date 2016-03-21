@@ -19,8 +19,8 @@ class CostEngine
   end
 
   def apply_discounts(cost_before_discounts, order)
-    promotional_rules.reduce(cost_before_discounts) do |sum, rule|
-      sum - rule.call(sum, order)
+    promotional_rules.reduce(cost_before_discounts) do |current_total, rule|
+      current_total - rule.apply(current_total, order)
     end
   end
 

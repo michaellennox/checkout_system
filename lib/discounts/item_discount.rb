@@ -6,7 +6,7 @@ class ItemDiscount
   end
 
   def apply(current_total, order)
-    order[item_code] > min_items ? order[item_code] * discount_to_apply : 0
+    order[item_code] >= min_items ? order[item_code] * discount_to_apply : 0
   end
 
   private
