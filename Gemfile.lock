@@ -1,7 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    byebug (8.2.2)
     diff-lcs (1.2.5)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
@@ -21,7 +20,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
   rspec
 
 BUNDLED WITH

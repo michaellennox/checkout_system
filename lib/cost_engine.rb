@@ -29,6 +29,7 @@ class CostEngine
   end
 
   def products_with_prices(products)
-    products.map { |product| [product.code, product.price] }.to_h
+    products.map { |product| [product.code, product.price] }
+      .to_h
   end
 end

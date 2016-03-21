@@ -25,6 +25,7 @@ class Checkout
   end
 
   def item_in_products?(item_code)
-    products.map{ |product| product.code }.include?(item_code)
+    products.map{ |product| product.code }
+      .include?(item_code)
   end
 end
